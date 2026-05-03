@@ -1,44 +1,44 @@
-<html lang="zh-CN"><head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PandoraGame | 游戏玩家论坛</title>
-    <!-- Tailwind CSS v3 -->
+    <title>潘多拉游戏项目展示</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Google Fonts - 复古奇幻字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&display=swap" rel="stylesheet">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <!-- GSAP for animations -->
+    <!-- GSAP 动画库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
-    <!-- 统一的 Tailwind 配置 -->
+    <!-- 自定义 Tailwind 配置 -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#FF4560',
-                        secondary: '#00E396',
-                        accent: '#775DD0',
-                        dark: '#121212',
-                        'dark-light': '#1E1E30',
-                        'dark-lighter': '#2D2D44',
-                        
+                        primary: '#6366f1',
+                        secondary: '#a855f7',
+                        accent: '#06b6d4',
+                        dark: '#0f172a',
+                        light: '#e0f2fe'
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
-                        fantasy: ['Cinzel', 'MedievalSharp', 'fantasy'],
+                        cyber: ['Rajdhani', 'Orbitron', 'sans-serif']
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate'
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(99, 102, 241, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.8), 0 0 30px rgba(168, 85, 247, 0.6)' }
                         }
                     }
                 }
@@ -48,1247 +48,1137 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .text-shadow {
-                text-shadow: 0 0 10px rgba(255, 69, 96, 0.7);
+                text-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
             }
             .text-shadow-lg {
-                text-shadow: 0 0 15px rgba(255, 69, 96, 0.9), 0 0 30px rgba(255, 69, 96, 0.5);
+                text-shadow: 0 0 20px rgba(99, 102, 241, 1), 0 0 30px rgba(168, 85, 247, 0.8);
             }
-            .bg-glass {
-                background: rgba(43, 45, 47, 0.8);
+            .neon-border {
+                box-shadow: 0 0 10px rgba(99, 102, 241, 0.8), inset 0 0 10px rgba(99, 102, 241, 0.2);
+            }
+            .neon-border-purple {
+                box-shadow: 0 0 10px rgba(168, 85, 247, 0.8), inset 0 0 10px rgba(168, 85, 247, 0.2);
+            }
+            .bg-grid {
+                background-image: 
+                    linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .glass-effect {
                 backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
+                background: rgba(15, 23, 42, 0.7);
+                border: 1px solid rgba(99, 102, 241, 0.3);
             }
-            .bg-glass-light {
-                background: rgba(43, 45, 47, 0.8);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-            }
-            .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-            }
-            .scrollbar-hide {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-            .gradient-text {
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
-                background-image: linear-gradient(90deg, #151617, #151617);
-            }
-            .gradient-border {
-                position: relative;
-                border: double 1px transparent;
-                background-image: linear-gradient(#121212, #121212), 
-                                  linear-gradient(0deg, #FF4560, #775DD0);
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-            }
-            .animate-wave {
-                animation: wave 10s linear infinite;
-            }
-            @keyframes wave {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
+            .glass-effect-purple {
+                backdrop-filter: blur(10px);
+                background: rgba(76, 29, 149, 0.3);
+                border: 1px solid rgba(168, 85, 247, 0.3);
             }
         }
     </style>
-</head>
-<body class="bg-dark text-white overflow-x-hidden">
-    <!-- 导航栏 -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-bold text-primary font-fantasy tracking-wider relative">
-                <span class="relative z-10">PandoraGame</span>
-                <span class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 blur-sm z-0"></span>
-            </a>
-            
-            <!-- 桌面导航 -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#hero" class="hover:text-primary transition-colors">首页</a>
-                <a href="#games" class="hover:text-primary transition-colors">热门游戏</a>
-                <a href="#forums" class="hover:text-primary transition-colors">论坛讨论</a>
-                <a href="#events" class="hover:text-primary transition-colors">游戏活动</a>
-                <a href="#marketplace" class="hover:text-primary transition-colors">游戏商城</a>
-            </div>
-            
-            <!-- 移动端菜单按钮 -->
-            <button id="menu-toggle" class="md:hidden text-2xl">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
         
-        <!-- 移动端导航菜单 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-glass-light">
-            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <a href="#hero" class="hover:text-primary transition-colors">首页</a>
-                <a href="#games" class="hover:text-primary transition-colors">热门游戏</a>
-                <a href="#forums" class="hover:text-primary transition-colors">论坛讨论</a>
-                <a href="#events" class="hover:text-primary transition-colors">游戏活动</a>
-                <a href="#marketplace" class="hover:text-primary transition-colors">游戏商城</a>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .cyber-font {
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .showcase-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%236366f1" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+        
+        .btn-neon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.8), 0 0 30px rgba(168, 85, 247, 0.6);
+        }
+        
+        .project-card {
+            transition: all 0.4s ease;
+            perspective: 1000px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.8), 0 0 30px rgba(168, 85, 247, 0.6);
+            }
+        }
+        
+        .code-block {
+            background: #1e1e2e;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            color: #cdd6f4;
+            overflow-x: auto;
+        }
+        
+        .code-keyword {
+            color: #cba6f7;
+        }
+        
+        .code-string {
+            color: #a6e3a1;
+        }
+        
+        .code-comment {
+            color: #7f849c;
+        }
+        
+        .code-number {
+            color: #fab387;
+        }
+        
+        .file-tree {
+            font-family: 'Fira Code', monospace;
+            color: #cdd6f4;
+            line-height: 1.6;
+        }
+        
+        .file-tree-folder {
+            color: #89b4fa;
+        }
+        
+        .file-tree-file {
+            color: #a6adc8;
+        }
+        
+        .file-tree-html {
+            color: #f9e2af;
+        }
+        
+        .file-tree-css {
+            color: #f38ba8;
+        }
+        
+        .file-tree-js {
+            color: #89dceb;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <!-- 矩阵背景动画 -->
+    <canvas id="matrixCanvas" class="matrix-bg"></canvas>
+    
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center animate-pulse-slow">
+                        <span class="cyber-font font-bold text-xl text-shadow">P</span>
+                    </div>
+                    <span class="cyber-font font-bold text-2xl text-shadow-lg">PANDORA</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="cyber-font font-medium hover:text-primary transition-colors">项目概览</a>
+                    <a href="#features" class="cyber-font font-medium hover:text-primary transition-colors">核心功能</a>
+                    <a href="#structure" class="cyber-font font-medium hover:text-primary transition-colors">文件结构</a>
+                    <a href="#demo" class="cyber-font font-medium hover:text-primary transition-colors">项目演示</a>
+                    <a href="#tech" class="cyber-font font-medium hover:text-primary transition-colors">技术栈</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="/home/user/vibecoding/workspace/pandora-game/index.html" target="_blank" class="cyber-font px-6 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded btn-neon">
+                        查看项目
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
-
-    <!-- 英雄区域 -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- 背景效果 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://p3-doubao-search-sign.byteimg.com/labis/d7f0a798133891af606370d895ca6900~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=dws0XnfqXMZcHQ3uFUVDLL2ODuo%3D" alt="游戏背景" class="w-full h-full object-cover opacity-30">
-            <div class="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark"></div>
-        </div>
-        
-        <!-- 主要内容 -->
-        <div class="container mx-auto px-4 z-10 pt-20">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 id="heading" class="text-4xl md:text-6xl font-bold mb-4">
-                        <span class="block" style="font-size: 64px;">游戏是</span>
-                        <span class="block" style="font-size: 64px;">无限的可能</span>
-                    </h1>
-                    <p class="text-xl mb-8 text-gray-400 mx-auto">探索游戏世界，感受每一个游戏带来的激情体验。 最新游戏现已在各大平台上线。</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#games" class="px-8 py-3 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all transform hover:scale-105">
-                            探索游戏
-                        </a>
-                        <a href="#forums" class="px-8 py-3 gradient-border rounded-full hover:bg-opacity-20 transition-all transform hover:scale-105">
-                            参与讨论
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                 
-                </div>
-            </div>
-       <!-- 游戏新闻预览 -->
-            <div class="mt-20 bg-glass rounded-xl p-6 mx-auto">
-                <div class="flex items-center gap-4">
-                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/c825fe0aae5649f783261d2b9e6c3d79~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=%2BltaYTXVwqxrqjF6Bn%2FxxWVm4b8%3D" alt="游戏新闻" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="font-bold text-lg">《冥河：暗影大师》新DLC发布</h3>
-                        <p class="text-gray-400">最新资料片 · 2小时前</p>
-                        <div class="mt-2 flex items-center gap-2">
-                            <span class="bg-primary/20 text-primary text-xs px-2 py-1 rounded-full">RPG</span>
-                            <span class="bg-secondary/20 text-secondary text-xs px-2 py-1 rounded-full">动作</span>
-                            <span class="bg-accent/20 text-accent text-xs px-2 py-1 rounded-full">潜行</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                       <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-arrow-right"></i>
-                       </button>
-                    </div>
-                </div>
-            </div>         
-         
-            
-        </div>
-        
-        <!-- 向下滚动指示 -->
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#games" class="text-primary text-m">
-                <i class="fa fa-chevron-down"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- 热门游戏区域 -->
-    <section id="games" class="py-20 relative">
-        <!-- 背景效果 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/921589334830219323~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=riwtQPi7kgjCH5zMCLc0BMfyw4c%3D" alt="游戏背景" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-b from-dark to-dark-light"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">热门游戏</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    探索最受玩家欢迎的游戏，查看最新发布和即将上线的作品。
-                    点击封面了解详情和参与讨论。
-                </p>
-            </div>
-            
-            <!-- 热门游戏列表 -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="inline-block w-8 h-0.5 bg-primary mr-2"></span>
-                    热门推荐
-                </h3>
-                
-                <div class="relative">
-                    <!-- 左右滚动按钮 -->
-                    <button id="albums-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-dark/80 p-2 rounded-full z-10">
-                        <i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button id="albums-next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-dark/80 p-2 rounded-full z-10">
-                        <i class="fa fa-chevron-right"></i>
-                    </button>
-                    
-                    <!-- 专辑滚动容器 -->
-                    <div id="albums-container" class="flex gap-6 overflow-x-auto scrollbar-hide pb-6 snap-x snap-mandatory">
-                        <!-- 专辑1 -->
-                        <div class="min-w-[280px] md:min-w-[320px] snap-start group">
-                            <div class="relative overflow-hidden rounded-lg mb-4 transform transition-transform group-hover:scale-105">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/51c9bf1f5eb14e2fadbcf85b6736dfb5~tplv-a9rns2rl98-image.image?rcl=202509171415076FB6943049D6ADD975FA&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758694511&amp;x-signature=HPPfnJst6ekOc0l7wua31xcSd5c%3D" alt="专辑封面" class="w-full aspect-square object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
-                                    <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-play"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <h4 class="font-bold text-lg">幻影迷城</h4>
-                            <p class="text-gray-400">开放世界 · 角色扮演</p>
-                        </div>
-                        
-                        <!-- 专辑2 -->
-                        <div class="min-w-[280px] md:min-w-[320px] snap-start">
-                            <div class="relative overflow-hidden rounded-lg mb-4 transform transition-transform group-hover:scale-105">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/b4c9441cbf7441629d76945996844487~tplv-a9rns2rl98-image.image?rcl=202509171623155D4906AF2EE11FD4E790&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758702199&amp;x-signature=83VP18IMFTM%2F7%2FV3fv5DbaIGLd0%3D" alt="专辑封面" class="w-full aspect-square object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
-                                    <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-play"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <h4 class="font-bold text-lg">星际殖民</h4>
-                            <p class="text-gray-400">策略 · 建造</p>
-                        </div>
-                        
-                        <!-- 专辑3 -->
-                        <div class="min-w-[280px] md:min-w-[320px] snap-start group">
-                            <div class="relative overflow-hidden rounded-lg mb-4 transform transition-transform group-hover:scale-105">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fc6a622fffca4183b14fbd5b2605f850~tplv-a9rns2rl98-image.image?rcl=2025091715151802DEF7BC6CBA6CDA0E9D&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758698122&amp;x-signature=4R7X%2FRcpDvs%2B7I0IfhpraIvMJYU%3D" alt="专辑封面" class="w-full aspect-square object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
-                                    <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-play"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <h4 class="font-bold text-lg">极速狂飙</h4>
-                            <p class="text-gray-400">竞速 · 多人</p>
-                        </div>
-                        
-                        <!-- 专辑4 -->
-                        <div class="min-w-[280px] md:min-w-[320px] snap-start group">
-                            <div class="relative overflow-hidden rounded-lg mb-4 transform transition-transform group-hover:scale-105">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/ac7f1db4037c4fe0907e4cdc84500549~tplv-a9rns2rl98-image.image?rcl=20250917164313C324549BAC63BC0B3035&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758703398&amp;x-signature=Wb38ec%2FR7R3AgnOiSQ%2FUBTbUKNw%3D" alt="专辑封面" class="w-full aspect-square object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
-                                    <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-play"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <h4 class="font-bold text-lg">魔法传说</h4>
-                            <p class="text-gray-400">角色扮演 · 奇幻</p>
-                        </div>
-
-                      <!-- 专辑5 -->
-                        <div class="min-w-[280px] md:min-w-[320px] snap-start group">
-                            <div class="relative overflow-hidden rounded-lg mb-4 transform transition-transform group-hover:scale-105">
-                                <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/890202bf666c427090e0c2042f7716c5~tplv-a9rns2rl98-image.image?rcl=202509171719351FDD8885D9CD91AE2A38&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1758705578&amp;x-signature=dcRDOZo%2FH9Sntn5UJ9StWdnghFs%3D" alt="专辑封面" class="w-full aspect-square object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
-                                    <button class="w-14 h-14 rounded-full bg-primary text-dark flex items-center justify-center text-xl font-bold">
-                                        <i class="fa fa-play"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <h4 class="font-bold text-lg">像素冒险</h4>
-                            <p class="text-gray-400">平台跳跃 · 独立</p>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 即将上线 -->
-            <div>
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="inline-block w-8 h-0.5 bg-secondary mr-2"></span>
-                    即将上线
-                </h3>
-                
-                <div class="space-y-4">
-                    <!-- 单曲1 -->
-                    <div class="bg-glass-light rounded-lg p-4 flex items-center justify-between hover:bg-opacity-80 transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded overflow-hidden flex-shrink-0">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/51c9bf1f5eb14e2fadbcf85b6736dfb5~tplv-a9rns2rl98-image.image?rcl=202509171415076FB6943049D6ADD975FA&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758694511&amp;x-signature=HPPfnJst6ekOc0l7wua31xcSd5c%3D" alt="单曲封面" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-bold">深海探险</h4>
-                                <p class="text-gray-400 text-sm">冒险 · 生存 · 2025.08.15</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                    
-                            <div class="flex items-center gap-2">
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-star"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-share-alt"></i>
-                                </a>
-                            </div>
-                          <button class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center">
-                                <i class="fa fa-play"></i>
-                          </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 单曲2 -->
-                    <div class="bg-glass-light rounded-lg p-4 flex items-center justify-between hover:bg-opacity-80 transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded overflow-hidden flex-shrink-0">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/b4c9441cbf7441629d76945996844487~tplv-a9rns2rl98-image.image?rcl=202509171623155D4906AF2EE11FD4E790&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758702199&amp;x-signature=83VP18IMFTM%2F7%2FV3fv5DbaIGLd0%3D" alt="单曲封面" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-bold">机甲战士</h4>
-                                <p class="text-gray-400 text-sm">动作 · 射击 · 2025.09.20</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                    
-                            <div class="flex items-center gap-2">
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-star"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-share-alt"></i>
-                                </a>
-                            </div>
-                          <button class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center">
-                                <i class="fa fa-play"></i>
-                          </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 单曲3 -->
-                    <div class="bg-glass-light rounded-lg p-4 flex items-center justify-between hover:bg-opacity-80 transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded overflow-hidden flex-shrink-0">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fc6a622fffca4183b14fbd5b2605f850~tplv-a9rns2rl98-image.image?rcl=2025091715151802DEF7BC6CBA6CDA0E9D&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758698122&amp;x-signature=4R7X%2FRcpDvs%2B7I0IfhpraIvMJYU%3D" alt="单曲封面" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-bold">王国建造者</h4>
-                                <p class="text-gray-400 text-sm">策略 · 模拟 · 2025.10.05</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            
-                            <div class="flex items-center gap-2">
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-star"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-share-alt"></i>
-                                </a>
-                            </div>
-                          <button class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center">
-                                <i class="fa fa-play"></i>
-                          </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 单曲4 -->
-                    <div class="bg-glass-light rounded-lg p-4 flex items-center justify-between hover:bg-opacity-80 transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded overflow-hidden flex-shrink-0">
-                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/ac7f1db4037c4fe0907e4cdc84500549~tplv-a9rns2rl98-image.image?rcl=20250917164313C324549BAC63BC0B3035&amp;rk3s=8e244e95&amp;rrcfp=2609e108&amp;x-expires=1758703398&amp;x-signature=Wb38ec%2FR7R3AgnOiSQ%2FUBTbUKNw%3D" alt="单曲封面" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-bold">赛博都市</h4>
-                                <p class="text-gray-400 text-sm">角色扮演 · 科幻 · 2025.11.18</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            
-                            <div class="flex items-center gap-2">
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-star"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-heart"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                                    <i class="fa fa-share-alt"></i>
-                                </a>
-                            </div>
-                          <button class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center">
-                                <i class="fa fa-play"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 游戏平台链接 -->
-            <div class="mt-12 text-center">
-                <p class="text-gray-400 mb-6">在各大平台发现更多游戏</p>
-                <div class="flex justify-center gap-6">
-                    <a href="#" class="w-12 h-12 rounded-full bg-glass-light flex items-center justify-center hover:bg-primary hover:text-dark transition-all">
-                        <i class="fa fa-windows text-xl"></i>
-                    </a>
-                    <a href="#" class="w-12 h-12 rounded-full bg-glass-light flex items-center justify-center hover:bg-primary hover:text-dark transition-all">
-                        <i class="fa fa-apple text-xl"></i>
-                    </a>
-                    <a href="#" class="w-12 h-12 rounded-full bg-glass-light flex items-center justify-center hover:bg-primary hover:text-dark transition-all">
-                        <i class="fa fa-play text-xl"></i>
-                    </a>
-                    <a href="#" class="w-12 h-12 rounded-full bg-glass-light flex items-center justify-center hover:bg-primary hover:text-dark transition-all">
-                        <i class="fa fa-gamepad text-xl"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 论坛讨论区域 -->
-    <section id="forums" class="py-20 bg-dark-light relative">
-        <!-- 背景效果 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://p11-doubao-search-sign.byteimg.com/labis/49204e9a877b004338ac7254ef0191e0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=180PFgWc7jAyiU%2FwenkmlwPOf4A%3D" alt="游戏背景" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-b from-dark-light to-dark"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">论坛讨论</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    参与热门话题讨论，分享游戏心得，结交志同道合的玩家朋友。
-                </p>
-            </div>
-            
-            <!-- 论坛分类 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                <!-- 论坛分类1 -->
-                <div class="bg-glass rounded-lg overflow-hidden group hover:shadow-lg hover:shadow-primary/20 transition-all">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/902456836076077066~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=h%2F8UrDsckAovHtoSZt%2FQakujld4%3D" alt="角色扮演" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                        <div class="absolute top-4 left-4 bg-primary text-dark font-bold px-3 py-1 rounded-full text-sm">
-                            热门
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-users text-primary"></i>
-                                <span class="text-sm text-gray-400">12,458 成员</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-comment text-secondary"></i>
-                                <span class="text-sm text-gray-400">328 今日讨论</span>
-                            </div>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">角色扮演游戏</h3>
-                        <p class="text-gray-400 mb-4">讨论最新RPG游戏、攻略和角色构建</p>
-                        <a href="#" class="inline-block px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                            进入讨论
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 论坛分类2 -->
-                <div class="bg-glass rounded-lg overflow-hidden group hover:shadow-lg hover:shadow-secondary/20 transition-all">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/c825fe0aae5649f783261d2b9e6c3d79~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=%2BltaYTXVwqxrqjF6Bn%2FxxWVm4b8%3D" alt="动作游戏" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                        <div class="absolute top-4 left-4 bg-secondary text-dark font-bold px-3 py-1 rounded-full text-sm">
-                            活跃
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-users text-primary"></i>
-                                <span class="text-sm text-gray-400">9,872 成员</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-comment text-secondary"></i>
-                                <span class="text-sm text-gray-400">256 今日讨论</span>
-                            </div>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">动作冒险游戏</h3>
-                        <p class="text-gray-400 mb-4">分享动作游戏攻略、技巧和精彩瞬间</p>
-                        <a href="#" class="inline-block px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                            进入讨论
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 论坛分类3 -->
-                <div class="bg-glass rounded-lg overflow-hidden group hover:shadow-lg hover:shadow-accent/20 transition-all">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1061541351088848935~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=JvlJWFuPgfbcElCwFXXMWTHje0c%3D" alt="策略游戏" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                        <div class="absolute top-4 left-4 bg-accent text-dark font-bold px-3 py-1 rounded-full text-sm">
-                            新分类
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-users text-primary"></i>
-                                <span class="text-sm text-gray-400">5,341 成员</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa fa-comment text-secondary"></i>
-                                <span class="text-sm text-gray-400">178 今日讨论</span>
-                            </div>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">策略与模拟</h3>
-                        <p class="text-gray-400 mb-4">讨论策略游戏、模拟经营和战棋游戏</p>
-                        <a href="#" class="inline-block px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                            进入讨论
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            
-            <!-- 游戏场景展示 -->
-
-          <!-- motion -->
-          <div>    
-          <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">游戏场景</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    精选游戏场景展示，探索游戏世界的无限魅力。
-                </p>
-          </div>
-          <!-- 游戏场景motion --> 
-          <article id="gallery">
-          <section class="img-group-container">
-      <div>
-            <ul class="img-group">
-                <li class="img-container">
-                    <img src="https://p11-doubao-search-sign.byteimg.com/pgc-image/152401987942803ea4c67a8~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793336205&x-signature=A2k6UHSsMwgZmQMrSLuLHP16xrM%3D">
-                    <h3>#奇幻世界</h3>
-                </li>
-                <li class="img-container">
-                    <img src="https://p3-doubao-search-sign.byteimg.com/labis/8eae10edf8fcfce4f91e28d850feb610~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793336205&x-signature=9dKFNq8sq4BrFx6CybnOynXIUfE%3D">
-                    <h3>#史诗战场</h3>
-                </li>
-                <li class="img-container">
-                    <img src="https://p26-doubao-search-sign.byteimg.com/labis/94060486ac3a11c83f730cf4d2012778~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793336205&x-signature=f%2BTmz%2FxiuBTeSYNDQw0u0R2DimM%3D">
-                    <h3>#像素冒险</h3>
-                </li>
-                <li class="img-container">
-                    <img src="https://p3-doubao-search-sign.byteimg.com/pgc-image/35e9b212ab1a4cb68a09be02c63fc6a9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793336205&x-signature=VNr5uhMJsqlaR40nIKaqLEJ%2B9Ng%3D">
-                    <h3>#开放世界</h3>
-                </li>
-                <li class="img-container">
-                    <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/52a3a18370d74e0e974814e04d66f3a4~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793336205&x-signature=ny8YnVAsZPsDtgOcFMmOu%2BsBqF0%3D">
-                    <h3>#春节活动</h3>
-                </li>
-            </ul>
-        </div>
-    </section>
-</article>
-<div class="progress"></div>
-
-<script type="module">
-    import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@12.23.12/+esm"
-
-    const items = document.querySelectorAll(".img-container")
-
-    // Animate gallery horizontally during vertical scroll
-    // 监听横向滚动，当滚动到末尾时自动向下滚动
-    const galleryContainer = document.querySelector(".img-group-container");
-    const nextSection = document.getElementById("events");
     
-    // 监听滚动事件，检测是否滚动到了底部
-    galleryContainer.addEventListener('scroll', function() {
-        const scrollPercentage = (galleryContainer.scrollTop / (galleryContainer.scrollHeight - galleryContainer.clientHeight)) * 100;
-        
-        // 当滚动到95%以上时，自动滚动到下一个区域
-        if (scrollPercentage > 95) {
-            nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    // 监听触摸事件，检测是否在底部尝试继续滑动
-    let touchStartY = 0;
-    galleryContainer.addEventListener('touchstart', function(e) {
-        touchStartY = e.touches[0].clientY;
-    });
-
-    galleryContainer.addEventListener('touchmove', function(e) {
-        const touchCurrentY = e.touches[0].clientY;
-        const scrollPercentage = (galleryContainer.scrollTop / (galleryContainer.scrollHeight - galleryContainer.clientHeight)) * 100;
-        
-        // 如果在底部且继续向下滑动，则滚动到下一个区域
-        if (scrollPercentage > 95 && touchCurrentY < touchStartY) {
-            e.preventDefault();
-            nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    scroll(
-        animate(".img-group", {
-            transform: ["none", `translateX(-${items.length - 1}00vw)`],
-        }),
-        { target: galleryContainer }
-    )
-
-    // Progress bar representing gallery scroll
-    scroll(animate(".progress", { scaleX: [0, 1] }), {
-        target: galleryContainer,
-    })
-</script>
-
-<style>
-    #gallery {
-        width: 98vw;
-    }
-
-    #gallery h3 {
-        font-family: "" Azeret Mono "", monospace;
-    }
-
-    #gallery header,
-    #gallery footer {
-        height: 30vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .img-group-container {
-        height: 250vh;
-        position: relative;
-    }
-
-    .img-group-container > div {
-        position: sticky;
-        top: 0;
-        overflow: hidden;
-        height: 90vh;
-    }
-
-    .img-group {
-        display: flex;
-    }
-
-    .img-container {
-        display: flex;
-        width: 38vw;
-        height: 90vh;
-        flex: 0 0 auto;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    #gallery header h2 {
-        font-size: 56px;
-        font-weight: 700;
-        letter-spacing: -3px;
-        line-height: 1.2;
-        text-align: center;
-        margin: 0;
-    }
-
-    .img-container h3 {
-        margin: 0;
-        font-size: 48px;
-        font-weight: 700;
-        letter-spacing: -3px;
-        line-height: 1.2;
-        position: relative;
-        bottom: 30px;
-        display: inline-block;
-    }
-
-    .img-container img {
-        width: 480px;
-        height: auto;
-        border-radius: 12px;
-    }
-  
-</style>
-
-
-    </div></div></div></section>
-
-    <!-- 周边活动区域 -->
-    <section id="events" class="py-20 relative" background-color:="" #33353a="">
-        <!-- 背景效果 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/921589334830219323~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=riwtQPi7kgjCH5zMCLc0BMfyw4c%3D" alt="游戏背景" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-b from-dark to-dark-light"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">周边活动</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    参与游戏周边活动，赢取独家周边商品，与游戏开发者面对面交流。
+    <!-- 英雄区域 -->
+    <section class="showcase-section flex items-center pt-20">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-block cyber-font text-accent mb-4 px-6 py-2 border border-accent rounded-full">
+                    赛博朋克游戏官网项目
+                </div>
+                <h1 class="cyber-font text-5xl md:text-7xl font-bold mb-8 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        CODE: PANDORA
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-12 text-gray-300 leading-relaxed">
+                    沉浸式赛博朋克游戏官网 + 游戏界面演示，集成矩阵背景、霓虹特效、全息UI，打造未来科技视觉体验
                 </p>
-            </div>
-            
-            <div class="container mx-auto">
-                <!-- 左侧：留言板 -->
-                <div class="max-w-2xl mx-auto">
-              
-                    
-                    <!-- 留言列表 -->
-                    <div id="comments-container" class="space-y-6">
-                        <!-- 留言1 -->
-                        <div class="bg-glass rounded-lg p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center font-bold">
-                                        G
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold">Grace</h4>
-                                        <p class="text-sm text-gray-400">2025-05-01</p>
-                                    </div>
-                                </div>
-                                <div class="text-gray-400">
-                                    <i class="fa fa-heart"></i> 24
-                                </div>
-                            </div>
-                            <p class="text-gray-300">
-                                《幻影迷城》的新DLC太棒了！新的剧情和玩法让游戏体验更加丰富，期待下一次更新！
-                            </p>
-                        </div>
-                        
-                        <!-- 留言2 -->
-                        <div class="bg-glass rounded-lg p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold" style="color: rgb(51, 51, 51);">S</div>
-                                    <div>
-                                        <h4 class="font-bold">Stephanie</h4>
-                                        <p class="text-sm text-gray-400">2024-09-28</p>
-                                    </div>
-                                </div>
-                                <div class="text-gray-400">
-                                    <i class="fa fa-heart"></i> 18
-                                </div>
-                            </div>
-                            <p class="text-gray-300">
-                                参加了上周的PandoraGame线下活动，见到了很多游戏开发者，收获满满！希望以后能有更多这样的活动。
-                            </p>
-                        </div>
-                        
-                        <!-- 留言3 -->
-                        <div class="bg-glass rounded-lg p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-accent text-dark flex items-center justify-center font-bold">
-                                        S
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold">山野里的小花儿</h4>
-                                        <p class="text-sm text-gray-400">2024-05-25</p>
-                                    </div>
-                                </div>
-                                <div class="text-gray-400">
-                                    <i class="fa fa-heart"></i> 12
-                                </div>
-                            </div>
-                            <p class="text-gray-300">
-                                刚刚收到了《星际殖民》的限量版周边，质量非常好！游戏本体也很好玩，推荐给所有策略游戏爱好者。
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- 加载更多按钮 -->
-                    <div class="text-center mt-8">
-                        <button id="load-more-comments" class="px-6 py-2 gradient-border rounded-full hover:bg-opacity-20 transition-all">加载更多</button>
-                    </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="/home/user/vibecoding/workspace/pandora-game/index.html" target="_blank" class="cyber-font px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg text-lg btn-neon animate-glow w-full sm:w-auto">
+                        体验项目
+                    </a>
+                    <a href="#overview" class="cyber-font px-8 py-4 border border-primary text-primary hover:bg-primary/10 transition-colors rounded-lg text-lg w-full sm:w-auto">
+                        了解更多
+                    </a>
                 </div>
-                
             </div>
-        </div>
-    </section>
-
-    <!-- 实体版购买区域 -->
-    <section id="marketplace" class="py-20 bg-dark-light relative">
-        <!-- 背景效果 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://p3-doubao-search-sign.byteimg.com/labis/d7f0a798133891af606370d895ca6900~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=dws0XnfqXMZcHQ3uFUVDLL2ODuo%3D" alt="游戏背景" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-b from-dark-light to-dark"></div>
         </div>
         
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">实体版购买</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    购买游戏实体版和独家周边商品，收藏限量版游戏套装。
-                </p>
-            </div>
-            
-            <!-- 实体版游戏商品 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <!-- 实体版游戏1 -->
-                <div class="bg-glass rounded-lg overflow-hidden group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://p26-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_5e1839771756c3b9aa2b46d8fe1bbf53_sx_181474_www1440-1440~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=R%2Bl9GYJthovB1mORK6ExgViabFo%3D" alt="游戏实体版" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                        <div class="absolute top-4 right-4 bg-primary text-dark font-bold px-3 py-1 rounded-full text-sm">
-                            限量版
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">幻影迷城 限定版</h3>
-                        <p class="text-gray-400 mb-4">
-                            实体版游戏，精美包装盒，艺术设定集，原声音乐CD，限量手办。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold text-xl">¥399</p>
-                            <button class="px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                                立即购买
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 实体版游戏2 -->
-                <div class="bg-glass rounded-lg overflow-hidden group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1061541351088848935~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=JvlJWFuPgfbcElCwFXXMWTHje0c%3D" alt="游戏实体版" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">王国建造者 典藏版</h3>
-                        <p class="text-gray-400 mb-4">
-                            实体版游戏，精美地图，金属徽章，游戏原声，数字版激活码。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold text-xl">¥299</p>
-                            <button class="px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                                立即购买
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 游戏周边3 -->
-                <div class="bg-glass rounded-lg overflow-hidden group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/isp-i18n-media/image/09b0cbf85b0f51f8560627cac4581045~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=Xa9URNpJJ7G7ii114azyvlU%2BUkk%3D" alt="游戏周边" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                        <div class="absolute top-4 right-4 bg-secondary text-dark font-bold px-3 py-1 rounded-full text-sm">
-                            热销
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">赛博都市 主题手办</h3>
-                        <p class="text-gray-400 mb-4">
-                            高品质PVC手办，精细做工，限量发行，含收藏证书。
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold text-xl">¥499</p>
-                            <button class="px-6 py-2 bg-primary text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                                立即购买
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 游戏收藏套装 -->
-            <div>                
-                <div class="bg-glass rounded-lg overflow-hidden">
-                    <div class="flex flex-col md:flex-row">
-                        <div class="md:w-1/2 relative h-64 md:h-auto">
-<img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/1a70dac2ac5d469db56ac49d1c4bbb35~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793335592&x-signature=5AOreK1%2B8EbSgTO6aA8l2Ivpk%2BQ%3D" alt="游戏收藏套装" class="w-full h-full object-cover transform transition-transform group-hover:scale-110">
-                            <div class="absolute top-4 left-4 bg-accent text-dark font-bold px-3 py-1 rounded-full text-sm">
-                                收藏套装
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 p-8">
-                            <h4 class="font-bold text-2xl mb-4">PandoraGame 终极收藏套装</h4>
-                            <p class="text-gray-300 mb-6">
-                                包含三款热门游戏的实体版，限量版手办，定制鼠标垫，主题T恤和独家游戏内道具兑换码。
-                                这是游戏收藏家的必备套装。
-                            </p>
-                            <div class="flex flex-wrap gap-4 mb-6">
-                                <div class="bg-dark-lighter rounded-lg px-3 py-1 text-center">
-                                    <p class="text-sm text-gray-400">3款实体游戏</p>
-                                </div>
-                                <div class="bg-dark-lighter rounded-lg px-3 py-1 text-center">
-                                    <p class="text-sm text-gray-400">限量手办</p>
-                                </div>
-                                <div class="bg-dark-lighter rounded-lg px-3 py-1 text-center">
-                                    <p class="text-sm text-gray-400">主题T恤</p>
-                                </div>
-                                <div class="bg-dark-lighter rounded-lg px-3 py-1 text-center">
-                                    <p class="text-sm text-gray-400">独家道具</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                                <div>
-                                    <p class="text-gray-400 line-through">原价: ¥1299</p>
-                                    <p class="font-bold text-2xl text-accent">¥899</p>
-                                </div>
-                                <button class="px-8 py-3 bg-accent text-dark font-bold rounded-full hover:bg-opacity-80 transition-all">
-                                    立即购买
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- 装饰元素 -->
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent"></div>
+        <div class="absolute top-1/4 left-10 w-20 h-20 bg-primary rounded-full filter blur-3xl opacity-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-secondary rounded-full filter blur-3xl opacity-10 animate-pulse-slow"></div>
     </section>
-
-    <!-- 页脚 -->
-    <footer class="bg-dark py-12 border-t border-gray-800">
+    
+    <!-- 项目概览 -->
+    <section id="overview" class="py-20 bg-dark relative overflow-hidden">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <a href="#hero" class="text-2xl font-bold mb-4 md:mb-0">Olivia</a>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fa fa-spotify text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fa fa-apple text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fa fa-youtube-play text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fa fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <i class="fa fa-instagram text-xl"></i>
-                    </a>
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        项目概览
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    潘多拉游戏项目是一个完整的赛博朋克风格游戏官网，包含游戏介绍、角色展示、游戏玩法和下载功能
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="project-card relative glass-effect rounded-xl overflow-hidden">
+                    <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ca84ba01ad924b25b7d7aa3afd9d8b67~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260503144528196F3E62E9AA7E02A743&rrcfp=f06b921b&x-expires=1780382778&x-signature=hbLHb1As%2Bfc%2BJ9dL%2Fm9KR5ZNvEs%3D" 
+                         alt="潘多拉游戏背景" 
+                         class="w-full h-auto rounded-lg neon-border">
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary rounded-full opacity-20 animate-pulse-slow"></div>
+                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-primary rounded-full opacity-20 animate-pulse-slow"></div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="cyber-font text-2xl font-bold mb-3 text-primary">项目定位</h3>
+                        <p class="text-gray-300">
+                            为CODE: PANDORA游戏打造的官方网站，集游戏展示、用户互动、下载引导于一体的沉浸式体验平台
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="cyber-font text-2xl font-bold mb-3 text-primary">核心价值</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>沉浸式赛博朋克视觉体验，提升品牌形象</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>完整的游戏信息展示，吸引潜在玩家</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>响应式设计，支持多端访问</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>游戏界面预览，增强用户期待感</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="cyber-font text-2xl font-bold mb-3 text-primary">目标用户</h3>
+                        <p class="text-gray-300">
+                            赛博朋克爱好者、RPG游戏玩家、科幻题材粉丝、潜在游戏用户
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 核心功能 -->
+    <section id="features" class="py-20 bg-gradient-to-b from-dark to-gray-900 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        核心功能
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    六大核心功能模块，打造完整的游戏官网体验
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 功能1 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">响应式设计</h3>
+                    <p class="text-gray-400">
+                        完美适配PC、平板、手机等多种设备，提供一致的用户体验
+                    </p>
+                </div>
+                
+                <!-- 功能2 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">矩阵背景</h3>
+                    <p class="text-gray-400">
+                        动态矩阵代码雨效果，营造赛博朋克氛围
+                    </p>
+                </div>
+                
+                <!-- 功能3 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">角色展示</h3>
+                    <p class="text-gray-400">
+                        3D角色卡片展示，包含角色信息和背景故事
+                    </p>
+                </div>
+                
+                <!-- 功能4 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-gamepad"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">游戏界面预览</h3>
+                    <p class="text-gray-400">
+                        模拟游戏HUD界面，展示游戏内UI设计
+                    </p>
+                </div>
+                
+                <!-- 功能5 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-download"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">多平台下载</h3>
+                    <p class="text-gray-400">
+                        支持PC、主机、移动端多平台下载引导
+                    </p>
+                </div>
+                
+                <!-- 功能6 -->
+                <div class="feature-card glass-effect p-6 rounded-xl">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">用户系统</h3>
+                    <p class="text-gray-400">
+                        登录注册功能，为后续游戏账号系统做准备
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 文件结构 -->
+    <section id="structure" class="py-20 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        文件结构
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    清晰的文件组织结构，便于维护和扩展
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="glass-effect rounded-xl p-8">
+                    <h3 class="cyber-font text-2xl font-bold mb-6 text-primary">项目目录结构</h3>
+                    <div class="file-tree space-y-2">
+                        <div><span class="file-tree-folder">📁 pandora-game/</span></div>
+                        <div class="ml-4"><span class="file-tree-html">📄 index.html</span>          <span class="text-gray-500"># 主页面</span></div>
+                        <div class="ml-4"><span class="file-tree-folder">📁 assets/</span></div>
+                        <div class="ml-8"><span class="file-tree-folder">📁 css/</span></div>
+                        <div class="ml-12"><span class="file-tree-css">📄 style.css</span>       <span class="text-gray-500"># 样式文件</span></div>
+                        <div class="ml-8"><span class="file-tree-folder">📁 js/</span></div>
+                        <div class="ml-12"><span class="file-tree-js">📄 main.js</span>         <span class="text-gray-500"># 交互逻辑</span></div>
+                        <div class="ml-8"><span class="file-tree-folder">📁 images/</span></div>
+                        <div class="ml-12"><span class="file-tree-file">📄 [图片资源]</span>      <span class="text-gray-500"># 游戏图片</span></div>
+                        <div class="ml-4"><span class="file-tree-file">📄 README.md</span>        <span class="text-gray-500"># 项目说明</span></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="cyber-font text-2xl font-bold mb-6 text-primary">技术架构</h3>
+                    <div class="space-y-6">
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="cyber-font text-xl font-bold mb-3">前端架构</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>HTML5 + CSS3 + JavaScript ES6+</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>Tailwind CSS v3 用于样式管理</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>GSAP 用于高级动画效果</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>Font Awesome 用于图标</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="cyber-font text-xl font-bold mb-3">设计理念</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>移动优先的响应式设计</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>赛博朋克美学与现代UI结合</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>性能优化的动画效果</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span>无障碍设计原则</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 代码示例 -->
+    <section class="py-20 bg-gradient-to-b from-dark to-gray-900 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        代码示例
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    核心功能的代码实现示例
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8">
+                <!-- 矩阵背景代码 -->
+                <div>
+                    <h3 class="cyber-font text-2xl font-bold mb-4 text-primary">矩阵背景动画</h3>
+                    <div class="code-block">
+<pre><span class="code-keyword">function</span> <span class="code-function">initMatrixBackground</span>() {
+    <span class="code-keyword">const</span> canvas = <span class="code-variable">document</span>.<span class="code-method">getElementById</span>(<span class="code-string">'matrixCanvas'</span>);
+    <span class="code-keyword">const</span> ctx = <span class="code-variable">canvas</span>.<span class="code-method">getContext</span>(<span class="code-string">'2d'</span>);
+    
+    <span class="code-variable">canvas</span>.<span class="code-property">width</span> = <span class="code-variable">window</span>.<span class="code-property">innerWidth</span>;
+    <span class="code-variable">canvas</span>.<span class="code-property">height</span> = <span class="code-variable">window</span>.<span class="code-property">innerHeight</span>;
+    
+    <span class="code-comment">// 矩阵字符</span>
+    <span class="code-keyword">const</span> chars = <span class="code-string">'01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'</span>;
+    <span class="code-keyword">const</span> charArray = <span class="code-variable">chars</span>.<span class="code-method">split</span>(<span class="code-string">''</span>);
+    <span class="code-keyword">const</span> fontSize = <span class="code-number">14</span>;
+    <span class="code-keyword">const</span> columns = <span class="code-variable">canvas</span>.<span class="code-property">width</span> / <span class="code-variable">fontSize</span>;
+    
+    <span class="code-comment">// 初始化下落位置</span>
+    <span class="code-keyword">const</span> drops = [];
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> x = <span class="code-number">0</span>; x < <span class="code-variable">columns</span>; x++) {
+        <span class="code-variable">drops</span>[x] = <span class="code-number">1</span>;
+    }
+    
+    <span class="code-keyword">function</span> <span class="code-function">drawMatrix</span>() {
+        <span class="code-comment">// 半透明背景清除</span>
+        <span class="code-variable">ctx</span>.<span class="code-method">fillStyle</span> = <span class="code-string">'rgba(15, 23, 42, 0.04)'</span>;
+        <span class="code-variable">ctx</span>.<span class="code-method">fillRect</span>(<span class="code-number">0</span>, <span class="code-number">0</span>, <span class="code-variable">canvas</span>.<span class="code-property">width</span>, <span class="code-variable">canvas</span>.<span class="code-property">height</span>);
+        
+        <span class="code-variable">ctx</span>.<span class="code-method">fillStyle</span> = <span class="code-string">'#6366f1'</span>;
+        <span class="code-variable">ctx</span>.<span class="code-method">font</span> = <span class="code-variable">fontSize</span> + <span class="code-string">'px monospace'</span>;
+        
+        <span class="code-comment">// 绘制字符</span>
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-number">0</span>; i < <span class="code-variable">drops</span>.<span class="code-property">length</span>; i++) {
+            <span class="code-keyword">const</span> text = <span class="code-variable">charArray</span>[<span class="code-method">Math</span>.<span class="code-method">floor</span>(<span class="code-method">Math</span>.<span class="code-method">random</span>() * <span class="code-variable">charArray</span>.<span class="code-property">length</span>)];
+            <span class="code-variable">ctx</span>.<span class="code-method">fillText</span>(<span class="code-variable">text</span>, i * <span class="code-variable">fontSize</span>, <span class="code-variable">drops</span>[i] * <span class="code-variable">fontSize</span>);
+            
+            <span class="code-comment">// 重置下落位置</span>
+            <span class="code-keyword">if</span> (<span class="code-variable">drops</span>[i] * <span class="code-variable">fontSize</span> > <span class="code-variable">canvas</span>.<span class="code-property">height</span> && <span class="code-method">Math</span>.<span class="code-method">random</span>() > <span class="code-number">0.975</span>) {
+                <span class="code-variable">drops</span>[i] = <span class="code-number">0</span>;
+            }
+            <span class="code-variable">drops</span>[i]++;
+        }
+    }
+    
+    <span class="code-comment">// 动画循环</span>
+    <span class="code-method">setInterval</span>(<span class="code-variable">drawMatrix</span>, <span class="code-number">40</span>);
+}</pre>
+                    </div>
+                </div>
+                
+                <!-- 霓虹按钮样式 -->
+                <div>
+                    <h3 class="cyber-font text-2xl font-bold mb-4 text-primary">霓虹按钮效果</h3>
+                    <div class="code-block">
+<pre><span class="code-selector">.btn-neon</span> {
+    <span class="code-property">position</span>: relative;
+    <span class="code-property">overflow</span>: hidden;
+    <span class="code-property">transition</span>: all <span class="code-number">0.3s</span> ease;
+}
+
+<span class="code-selector">.btn-neon::before</span> {
+    <span class="code-property">content</span>: <span class="code-string">''</span>;
+    <span class="code-property">position</span>: absolute;
+    <span class="code-property">top</span>: <span class="code-number">0</span>;
+    <span class="code-property">left</span>: <span class="code-number">-100%</span>;
+    <span class="code-property">width</span>: <span class="code-number">100%</span>;
+    <span class="code-property">height</span>: <span class="code-number">100%</span>;
+    <span class="code-property">background</span>: linear-gradient(<span class="code-number">90deg</span>, transparent, rgba(<span class="code-number">99</span>, <span class="code-number">102</span>, <span class="code-number">241</span>, <span class="code-number">0.4</span>), transparent);
+    <span class="code-property">transition</span>: all <span class="code-number">0.6s</span> ease;
+}
+
+<span class="code-selector">.btn-neon:hover::before</span> {
+    <span class="code-property">left</span>: <span class="code-number">100%</span>;
+}
+
+<span class="code-selector">.btn-neon:hover</span> {
+    <span class="code-property">transform</span>: translateY(<span class="code-number">-2px</span>);
+    <span class="code-property">box-shadow</span>: <span class="code-number">0</span> <span class="code-number">0</span> <span class="code-number">20px</span> rgba(<span class="code-number">99</span>, <span class="code-number">102</span>, <span class="code-number">241</span>, <span class="code-number">0.8</span>), <span class="code-number">0</span> <span class="code-number">0</span> <span class="code-number">30px</span> rgba(<span class="code-number">168</span>, <span class="code-number">85</span>, <span class="code-number">247</span>, <span class="code-number">0.6</span>);
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 项目演示 -->
+    <section id="demo" class="py-20 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        项目演示
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    体验潘多拉游戏项目的视觉效果和交互功能
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-12">
+                <!-- 主页面演示 -->
+                <div class="glass-effect rounded-xl overflow-hidden">
+                    <div class="p-6 bg-gray-900 border-b border-primary/30">
+                        <h3 class="cyber-font text-2xl font-bold text-primary">主页面演示</h3>
+                    </div>
+                    <div class="p-8">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-lg overflow-hidden">
+                            <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ca84ba01ad924b25b7d7aa3afd9d8b67~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260503144528196F3E62E9AA7E02A743&rrcfp=f06b921b&x-expires=1780382778&x-signature=hbLHb1As%2Bfc%2BJ9dL%2Fm9KR5ZNvEs%3D" 
+                                 alt="潘多拉游戏主页面" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-6 text-center">
+                            <a href="/home/user/vibecoding/workspace/pandora-game/index.html" target="_blank" class="cyber-font px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg btn-neon">
+                                查看完整演示
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏界面演示 -->
+                <div class="glass-effect rounded-xl overflow-hidden">
+                    <div class="p-6 bg-gray-900 border-b border-primary/30">
+                        <h3 class="cyber-font text-2xl font-bold text-primary">游戏界面演示</h3>
+                    </div>
+                    <div class="p-8">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-lg overflow-hidden">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/c20dfe7b5a9147bba18a216b10e7c984~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260503144528196F3E62E9AA7E02A743&rrcfp=f06b921b&x-expires=1780382778&x-signature=dvzgnJY4kolUxvnlk%2Boad10JJ24%3D" 
+                                 alt="潘多拉游戏界面" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button id="showGameInterfaceBtn" class="cyber-font px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg btn-neon">
+                                查看游戏界面
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 技术栈 -->
+    <section id="tech" class="py-20 bg-gradient-to-b from-dark to-gray-900 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-4 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        技术栈
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    现代前端技术栈，确保项目的性能和可维护性
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 技术1 -->
+                <div class="glass-effect p-6 rounded-xl text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fa fa-html5 text-orange-500"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">HTML5</h3>
+                    <p class="text-gray-400">
+                        语义化标签，响应式设计基础
+                    </p>
+                </div>
+                
+                <!-- 技术2 -->
+                <div class="glass-effect p-6 rounded-xl text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fa fa-css3 text-blue-500"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">Tailwind CSS</h3>
+                    <p class="text-gray-400">
+                        实用优先的CSS框架，快速构建UI
+                    </p>
+                </div>
+                
+                <!-- 技术3 -->
+                <div class="glass-effect p-6 rounded-xl text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fa fa-code text-yellow-500"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">JavaScript</h3>
+                    <p class="text-gray-400">
+                        原生JS实现交互功能和动画效果
+                    </p>
+                </div>
+                
+                <!-- 技术4 -->
+                <div class="glass-effect p-6 rounded-xl text-center">
+                    <div class="text-5xl mb-4">
+                        <i class="fa fa-paint-brush text-purple-500"></i>
+                    </div>
+                    <h3 class="cyber-font text-xl font-bold mb-3">GSAP</h3>
+                    <p class="text-gray-400">
+                        专业的JavaScript动画库，实现流畅动画
+                    </p>
                 </div>
             </div>
             
+            <div class="mt-16 text-center">
+                <h3 class="cyber-font text-2xl font-bold mb-8 text-primary">项目亮点</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="glass-effect p-6 rounded-xl">
+                        <div class="text-3xl text-primary mb-4">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <h4 class="cyber-font text-lg font-bold mb-2">性能优化</h4>
+                        <p class="text-gray-400">
+                            优化的动画性能，流畅的用户体验
+                        </p>
+                    </div>
+                    
+                    <div class="glass-effect p-6 rounded-xl">
+                        <div class="text-3xl text-primary mb-4">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <h4 class="cyber-font text-lg font-bold mb-2">响应式设计</h4>
+                        <p class="text-gray-400">
+                            完美适配各种设备尺寸
+                        </p>
+                    </div>
+                    
+                    <div class="glass-effect p-6 rounded-xl">
+                        <div class="text-3xl text-primary mb-4">
+                            <i class="fa fa-cogs"></i>
+                        </div>
+                        <h4 class="cyber-font text-lg font-bold mb-2">可扩展性</h4>
+                        <p class="text-gray-400">
+                            模块化结构，易于扩展和维护
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+    </section>
+    
+    <!-- 行动召唤 -->
+    <section class="py-20 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="glass-effect rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+                <h2 class="cyber-font text-3xl md:text-5xl font-bold mb-6 text-shadow-lg">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        开始体验潘多拉世界
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    探索赛博朋克世界，体验沉浸式游戏官网，为未来的游戏之旅做好准备
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="/home/user/vibecoding/workspace/pandora-game/index.html" target="_blank" class="cyber-font px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg text-lg btn-neon animate-glow w-full sm:w-auto">
+                        立即体验
+                    </a>
+                    <a href="#" class="cyber-font px-8 py-4 border border-primary text-primary hover:bg-primary/10 transition-colors rounded-lg text-lg w-full sm:w-auto">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-10"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-60 h-60 bg-secondary rounded-full filter blur-3xl opacity-5"></div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 py-12 relative overflow-hidden">
+        <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <h4 class="font-bold mb-4">游戏</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#games" class="text-gray-400 hover:text-primary transition-colors">热门游戏</a></li>
-                        <li><a href="#games" class="text-gray-400 hover:text-primary transition-colors">新游推荐</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">游戏评测</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">游戏攻略</a></li>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                            <span class="cyber-font font-bold text-xl">P</span>
+                        </div>
+                        <span class="cyber-font font-bold text-2xl">PANDORA</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        赛博朋克风格游戏官网项目，展示未来科技视觉体验
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="cyber-font text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#overview" class="hover:text-primary transition-colors">项目概览</a></li>
+                        <li><a href="#features" class="hover:text-primary transition-colors">核心功能</a></li>
+                        <li><a href="#structure" class="hover:text-primary transition-colors">文件结构</a></li>
+                        <li><a href="#demo" class="hover:text-primary transition-colors">项目演示</a></li>
+                        <li><a href="#tech" class="hover:text-primary transition-colors">技术栈</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4">活动</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#events" class="text-gray-400 hover:text-primary transition-colors">活动日历</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">周边活动</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">活动回顾</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">参与方式</a></li>
+                    <h4 class="cyber-font text-lg font-bold mb-4">资源</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">开发文档</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">API参考</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">贡献指南</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">常见问题</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4">关于</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">制作人介绍</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">新闻动态</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">媒体资源</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">联系我们</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">支持</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">帮助中心</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">技术支持</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">联系我们</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">常见问题</a></li>
+                    <h4 class="cyber-font text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-2"></i>
+                            <span>contact@pandora.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2"></i>
+                            <span>+86 123 4567 8901</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker mr-2"></i>
+                            <span>北京市朝阳区</span>
+                        </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">© 2025 PandoraGame. 保留所有权利。</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">关于我们</a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">使用条款</a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">隐私政策</a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">网站地图</a>
-                </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2026 CODE: PANDORA. 保留所有权利。</p>
             </div>
         </div>
+        
+        <!-- 背景装饰 -->
+        <div class="absolute top-0 left-0 w-full h-full bg-grid opacity-5"></div>
     </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // 导航栏滚动效果
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-glass');
-            } else {
-                navbar.classList.remove('bg-glass');
-            }
-        });
-        
-        // 移动端菜单切换
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (mobileMenu.classList.contains('hidden')) {
-                menuToggle.innerHTML = '<i class="fa fa-bars"></i>';
-            } else {
-                menuToggle.innerHTML = '<i class="fa fa-times"></i>';
-            }
-        });
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                // 关闭移动端菜单
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    menuToggle.innerHTML = '<i class="fa fa-bars"></i>';
-                }
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // 留言表单提交
-        const commentForm = document.getElementById('comment-form');
-        const commentsContainer = document.getElementById('comments-container');
-        
-        commentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const commentInput = document.getElementById('comment');
-            
-            // 简单验证
-            if (!nameInput.value || !emailInput.value || !commentInput.value) {
-                alert('请填写所有必填字段');
-                return;
-            }
-            
-            // 创建新留言元素
-            const newComment = document.createElement('div');
-            newComment.className = 'bg-glass rounded-lg p-6';
-            
-            // 获取当前日期
-            const today = new Date();
-            const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-            
-            // 获取姓名首字母
-            const initial = nameInput.value.charAt(0).toUpperCase();
-            
-            // 设置留言内容
-            newComment.innerHTML = `
-                <div class="flex justify-between items-start mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-primary text-dark flex items-center justify-center font-bold">
-                            ${initial}
+    
+    <!-- 游戏界面模态框 -->
+    <div id="gameInterfaceModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content absolute inset-0 m-auto max-w-6xl max-h-[90vh] rounded-lg overflow-hidden">
+            <div class="game-interface h-full flex flex-col">
+                <!-- 游戏顶部HUD -->
+                <div class="hud-element p-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2 animate-pulse"></div>
+                            <span class="cyber-font text-sm">NEON</span>
                         </div>
-                        <div>
-                            <h4 class="font-bold">${nameInput.value}</h4>
-                            <p class="text-sm text-gray-400">${dateString}</p>
+                        <div class="flex items-center">
+                            <div class="w-20 bg-gray-700 rounded-full h-2 mr-2">
+                                <div class="bg-gradient-to-r from-green-500 to-green-300 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <span class="cyber-font text-xs">75/100</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-20 bg-gray-700 rounded-full h-2 mr-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-blue-300 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <span class="cyber-font text-xs">60/100</span>
                         </div>
                     </div>
-                    <div class="text-gray-400">
-                        <i class="fa fa-heart"></i> 0
+                    <div class="cyber-font text-lg font-bold">PANDORA</div>
+                    <div class="flex items-center space-x-4">
+                        <div class="cyber-font text-sm">
+                            <i class="fa fa-clock-o mr-1"></i> 20:45
+                        </div>
+                        <div class="cyber-font text-sm">
+                            <i class="fa fa-map-marker mr-1"></i> 新东京市中心
+                        </div>
                     </div>
                 </div>
-                <p class="text-gray-300">
-                    ${commentInput.value}
-                </p>
-            `;
-            
-            // 添加到留言列表的顶部
-            commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
-            
-            // 重置表单
-            commentForm.reset();
-            
-            // 显示成功消息
-            alert('留言提交成功！');
-        });
-        
-        // 加载更多留言
-        const loadMoreComments = document.getElementById('load-more-comments');
-        let commentsLoaded = 3; // 初始加载的留言数量
-        
-        loadMoreComments.addEventListener('click', () => {
-            // 模拟加载更多留言
-            loadMoreComments.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 加载中...';
-            
-            setTimeout(() => {
-                // 创建新留言
-                for (let i = 0; i < 2; i++) {
-                    const newComment = document.createElement('div');
-                    newComment.className = 'bg-glass rounded-lg p-6';
+                
+                <!-- 游戏主内容区 -->
+                <div class="flex-1 flex">
+                    <!-- 左侧菜单 -->
+                    <div class="w-16 bg-gray-900 flex flex-col items-center justify-center space-y-8">
+                        <button class="hud-button w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                            <i class="fa fa-home"></i>
+                        </button>
+                        <button class="hud-button w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <button class="hud-button w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa fa-briefcase"></i>
+                        </button>
+                        <button class="hud-button w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                        <button class="hud-button w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-400">
+                            <i class="fa fa-sign-out"></i>
+                        </button>
+                    </div>
                     
-                    // 随机数据
-                    const names = ['陈静', '杨光', '周婷', '吴宇', '郑华'];
-                    const comments = [
-                        '《幻影迷城》的剧情设计真的很棒，每个关卡都充满了惊喜和挑战！',
-                        '期待下一个DLC的发布，这个游戏的世界观太吸引人了。',
-                        '游戏的画面效果非常出色，运行也很流畅，是近年来难得的好作品。',
-                        '多人模式的体验很棒，和朋友一起玩真的很有趣，推荐给所有玩家。',
-                        '我最喜欢游戏中的开放世界设计，可以自由探索的感觉太棒了。'
-                    ];
-                    
-                    const randomName = names[Math.floor(Math.random() * names.length)];
-                    const randomComment = comments[Math.floor(Math.random() * comments.length)];
-                    const randomDate = new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000));
-                    const dateString = `${randomDate.getFullYear()}-${String(randomDate.getMonth() + 1).padStart(2, '0')}-${String(randomDate.getDate()).padStart(2, '0')}`;
-                    const randomLikes = Math.floor(Math.random() * 50);
-                    const initial = randomName.charAt(0).toUpperCase();
-                    
-                    newComment.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold">
-                                    ${initial}
+                    <!-- 中央游戏区域 -->
+                    <div class="flex-1 bg-cover bg-center" style="background-image: url('https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/ca84ba01ad924b25b7d7aa3afd9d8b67~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260503144528196F3E62E9AA7E02A743&rrcfp=f06b921b&x-expires=1780382778&x-signature=hbLHb1As%2Bfc%2BJ9dL%2Fm9KR5ZNvEs%3D');">
+                        <div class="h-full flex items-center justify-center">
+                            <div class="glass-effect-purple p-8 rounded-xl text-center max-w-md">
+                                <h3 class="cyber-font text-2xl font-bold mb-4 text-shadow">任务：数据窃取</h3>
+                                <p class="text-gray-300 mb-6">
+                                    入侵荒坂公司的服务器，窃取关于新神经implants的机密数据。小心保安系统和巡逻 guards。
+                                </p>
+                                <div class="flex space-x-4 justify-center">
+                                    <button class="cyber-font px-6 py-2 bg-primary text-white rounded btn-neon">
+                                        接受任务
+                                    </button>
+                                    <button class="cyber-font px-6 py-2 border border-gray-500 text-gray-400 hover:bg-gray-800 transition-colors rounded">
+                                        稍后接受
+                                    </button>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold">${randomName}</h4>
-                                    <p class="text-sm text-gray-400">${dateString}</p>
-                                </div>
-                            </div>
-                            <div class="text-gray-400">
-                                <i class="fa fa-heart"></i> ${randomLikes}
                             </div>
                         </div>
-                        <p class="text-gray-300">
-                            ${randomComment}
-                        </p>
-                    `;
+                    </div>
                     
-                    commentsContainer.appendChild(newComment);
-                }
+                    <!-- 右侧物品栏 -->
+                    <div class="w-64 bg-gray-900 p-4">
+                        <h4 class="cyber-font text-lg font-bold mb-4 text-center">物品栏</h4>
+                        <div class="grid grid-cols-4 gap-2 mb-6">
+                            <div class="inventory-slot filled w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-gun text-primary"></i>
+                            </div>
+                            <div class="inventory-slot filled w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-shield text-secondary"></i>
+                            </div>
+                            <div class="inventory-slot w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-plus text-gray-600"></i>
+                            </div>
+                            <div class="inventory-slot w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-plus text-gray-600"></i>
+                            </div>
+                            <div class="inventory-slot filled w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-bolt text-yellow-400"></i>
+                            </div>
+                            <div class="inventory-slot filled w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-medkit text-red-400"></i>
+                            </div>
+                            <div class="inventory-slot w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-plus text-gray-600"></i>
+                            </div>
+                            <div class="inventory-slot w-full aspect-square rounded flex items-center justify-center">
+                                <i class="fa fa-plus text-gray-600"></i>
+                            </div>
+                        </div>
+                        
+                        <h4 class="cyber-font text-lg font-bold mb-4 text-center">技能</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="cyber-font text-sm">黑客技能</span>
+                                <div class="w-24 bg-gray-700 rounded-full h-1.5">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-1.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="cyber-font text-xs">85%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="cyber-font text-sm">战斗技能</span>
+                                <div class="w-24 bg-gray-700 rounded-full h-1.5">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-1.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <span class="cyber-font text-xs">70%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="cyber-font text-sm">潜行技能</span>
+                                <div class="w-24 bg-gray-700 rounded-full h-1.5">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-1.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="cyber-font text-xs">60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                commentsLoaded += 2;
+                <!-- 关闭按钮 -->
+                <button id="closeGameInterfaceBtn" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 transition-colors">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // 矩阵背景动画
+        function initMatrixBackground() {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const charArray = chars.split('');
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            
+            const drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                // 如果加载的留言超过一定数量，隐藏加载更多按钮
-                if (commentsLoaded >= 10) {
-                    loadMoreComments.innerHTML = '没有更多留言';
-                    loadMoreComments.disabled = true;
-                    loadMoreComments.classList.add('opacity-50', 'cursor-not-allowed');
-                } else {
-                    loadMoreComments.innerHTML = '加载更多';
-                }
-            }, 1000);
-        });
-                }
-            }, 1000);
-        });
-        
-        // 粉丝数据图表
-        const fansChartCtx = document.getElementById('fansChart').getContext('2d');
-        const fansChart = new Chart(fansChartCtx, {
-            type: 'line',
-            data: {
-                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
-                datasets: [{
-                    label: '粉丝数量',
-                    data: [12000, 15000, 18000, 22000, 25000, 28000, 32000, 35000, 38000, 42000],
-                    borderColor: '#00FFFF',
-                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
+                ctx.fillStyle = '#6366f1';
+                ctx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        },
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)'
-                        }
-                    }
+                    drops[i]++;
                 }
             }
-        });
+            
+            setInterval(drawMatrix, 40);
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
         
-        // 音乐播放器功能
-        const playButtons = document.querySelectorAll('.fa-play');
-        let isPlaying = false;
-        
-        playButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                if (isPlaying) {
-                    this.classList.remove('fa-pause');
-                    this.classList.add('fa-play');
-                    isPlaying = false;
-                    // 这里可以添加暂停音乐的逻辑
-                } else {
-                    this.classList.remove('fa-play');
-                    this.classList.add('fa-pause');
-                    isPlaying = true;
-                    // 这里可以添加播放音乐的逻辑
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化矩阵背景
+            initMatrixBackground();
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // 游戏界面模态框
+            const gameInterfaceModal = document.getElementById('gameInterfaceModal');
+            const showGameInterfaceBtn = document.getElementById('showGameInterfaceBtn');
+            const closeGameInterfaceBtn = document.getElementById('closeGameInterfaceBtn');
+            
+            showGameInterfaceBtn.addEventListener('click', () => {
+                gameInterfaceModal.classList.remove('hidden');
+            });
+            
+            closeGameInterfaceBtn.addEventListener('click', () => {
+                gameInterfaceModal.classList.add('hidden');
+            });
+            
+            // 点击模态框背景关闭
+            gameInterfaceModal.addEventListener('click', (e) => {
+                if (e.target === gameInterfaceModal.querySelector('.modal-backdrop')) {
+                    gameInterfaceModal.classList.add('hidden');
                 }
             });
-        });
-        
-        // 页面加载动画
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-        });
-        
-        // H1标题GSAP动画
-        gsap.registerPlugin(SplitText);
-        
-        gsap.set("h1", { opacity: 1 });
-        
-        let split = SplitText.create("#heading", { type: "chars" });
-        //now animate each character into place from 20px below, fading in:
-        gsap.from(split.chars, {
-          y: 20,
-          autoAlpha: 0,
-          stagger: 0.05
+            
+            // 添加滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('section > div > div').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // 添加CSS动画类
+            document.head.insertAdjacentHTML('beforeend', `
+                <style>
+                    .animate-fade-in {
+                        animation: fadeIn 1s ease-out forwards;
+                    }
+                    
+                    @keyframes fadeIn {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                </style>
+            `);
         });
     </script>
-
-
-</body></html>
+</body>
+</html>
